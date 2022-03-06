@@ -2,6 +2,7 @@ package hs.project.retrofitexample.retrofit
 
 import android.util.Log
 import com.google.gson.JsonElement
+import hs.project.retrofitexample.data.photo.PhotoData
 import hs.project.retrofitexample.util.API
 import hs.project.retrofitexample.util.RESPONSE_STATE
 import retrofit2.Call
@@ -19,7 +20,7 @@ class RetrofitManager {
 
     // 사진 검색 API 호출
     //  completion: (넘겨줄 데이터 형)
-    fun searchPhotos(searchTerm: String?, completion: (RESPONSE_STATE, String) -> Unit) {
+    fun searchPhotos(searchTerm: String?, completion: (RESPONSE_STATE, PhotoData?) -> Unit) {
 
         // null 이면 빈값, null 이 아니면 searchTerm 을 넣음
         val strSearchTerm = searchTerm ?: ""
@@ -27,15 +28,15 @@ class RetrofitManager {
         // null 이면 return
         val call = callRetrofitInterface?.searchPhotos(searchTerm = strSearchTerm) ?: return
 
-        call.enqueue(object : retrofit2.Callback<JsonElement> {
-            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+        call.enqueue(object : retrofit2.Callback<PhotoData> {
+            override fun onResponse(call: Call<PhotoData>, response: Response<PhotoData>) {
                 Log.d("RetrofitManager", "searchPhotos onResponse() called, response: ${response.body().toString()}")
-                completion(RESPONSE_STATE.SUCCESS, response.body().toString())
+                response.body()?.let { completion(RESPONSE_STATE.SUCCESS, it) }
             }
 
-            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+            override fun onFailure(call: Call<PhotoData>, t: Throwable) {
                 Log.d("RetrofitManager", "searchPhotos onFailure() called, t: $t")
-                completion(RESPONSE_STATE.FAIL, t.toString())
+                completion(RESPONSE_STATE.FAIL, null)
             }
         })
     }

@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/RetrofitExample/app/src/main/res/layout/activity_image_search.xml" value="0.24479166666666666" />
         <entry key="..\:/AndroidProject/RetrofitExample/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/AndroidProject/RetrofitExample/app/src/main/res/layout/activity_user_search.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidProject/RetrofitExample/app/src/main/res/layout/item_img_search.xml" value="0.17424242424242425" />
       </map>
     </option>
   </component>
